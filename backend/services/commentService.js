@@ -1,5 +1,5 @@
 const commentLog = require("../models/commentLog");
-
+const logger = require('../utils/logger');
 /**
  * @function addCommentService
  * @description Adds a comment to a ticket.
@@ -17,7 +17,7 @@ exports.addCommentService = async (body, userName) => {
 
     return true;
   } catch (error) {
-    console.log(error);
+    logger.error("Error in createCommentService", { error: error.message, stack: error.stack });
     return false;
   }
 };
@@ -44,6 +44,7 @@ exports.editCommentService = async (body, id) => {
 
     return true;
   } catch (error) {
+    logger.error("Error in editCommentService", { error: error.message, stack: error.stack });
     return false;
   }
 };
@@ -61,6 +62,7 @@ exports.deleteCommentService = async (id) => {
     });
     return true;
   } catch (error) {
+    logger.error("Error in deleteCommentService", { error: error.message, stack: error.stack });
     return false;
   }
 };

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon index.js",
+    "seed:admin": "node seeders/adminSeeder.js"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +21,7 @@
     "pg": "^8.10.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.30.0",
-    "validator": "^13.9.0"
+    "validator": "^13.9.0",
+    "winston": "^3.17.0"
   }
 }

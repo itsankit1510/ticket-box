@@ -5,6 +5,7 @@ const users = require("../models/users");
 const commentLog = require("../models/commentLog");
 const { dataRestructure } = require("../utils/data-restructure");
 const { Op, literal } = require("sequelize");
+const logger = require("../utils/logger");
 /**
  * Retrieves all tickets along with associated user data and pagination.
  * @async
@@ -43,7 +44,7 @@ exports.getAllTicketsService = async (page, limit) => {
  * @returns {boolean} Returns true on success, false on error.
  */
 exports.createTicketService = async (data, userName) => {
-  console.log(data);
+  logger.debug("Creating new ticket", { data, userName });
   try {
     const result = await sequelize.transaction(async (t) => {
       const getAssignee = await users.findOne({
@@ -76,10 +77,11 @@ exports.createTicketService = async (data, userName) => {
     });
     return true;
   } catch (error) {
-    console.log(error);
+    logger.error("Error creating ticket", { error: error.message, stack: error.stack });
     return false;
   }
 };
+
 /**
  * Changes the status of a ticket and logs the status change in the status log table.
  * @async
